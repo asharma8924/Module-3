@@ -1,0 +1,9 @@
+# Function to find top similar fires
+def find_top_similar(query, top_n=10):
+    top_similar = similarity_df[query].sort_values(ascending=False)[1:top_n+1]
+    return top_similar
+
+# Query fires
+queries = ['Fire_A', 'Fire_B', 'Fire_C']
+for query in queries:
+    print(f"Top 10 similar fires to {query}:\n", find_top_similar(query), "\n")
