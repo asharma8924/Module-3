@@ -1,0 +1,22 @@
+import requests
+from bs4 import BeautifulSoup
+import pandas as pd
+
+# Example for scraping fire data (simplified)
+url = 'https://example_firesite.com'
+response = requests.get(url)
+soup = BeautifulSoup(response.content, 'html.parser')
+
+# Extract relevant data points
+incident_data = []
+for row in soup.find_all('tr'):
+    cols = row.find_all('td')
+    incident_data.append({
+        'Incident': cols[0].text,
+        'Temperature': float(cols[1].text),
+        'Humidity': float(cols[2].text),
+        'Wind Speed': float(cols[3].text),
+        'Precipitation': float(cols[4].text)
+    })
+
+df = pd.DataFrame(incident_data)
