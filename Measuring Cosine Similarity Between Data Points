@@ -1,0 +1,15 @@
+from sklearn.metrics.pairwise import cosine_similarity
+from sklearn.preprocessing import StandardScaler
+
+# Select the features to calculate similarity
+features = ['Temperature', 'Humidity', 'Wind Speed', 'Precipitation']
+
+# Standardize the features
+scaler = StandardScaler()
+scaled_features = scaler.fit_transform(df[features])
+
+# Compute cosine similarity
+similarity_matrix = cosine_similarity(scaled_features)
+
+# Convert similarity matrix to a DataFrame
+similarity_df = pd.DataFrame(similarity_matrix, index=df['Incident'], columns=df['Incident'])
